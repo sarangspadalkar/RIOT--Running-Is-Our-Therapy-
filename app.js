@@ -3,7 +3,6 @@ var app = express();
 var bodyParser = require("body-parser");
 var router = express.Router();
 var mongoose = require("mongoose");
-const port = 8084;
 app.set("view engine", "ejs");
 app.set('views', __dirname + '/views');
 
@@ -67,6 +66,6 @@ app.use("/contact", contact); //This route is used for contact page.
 
 
 
-app.listen(process.env.PORT || port, function () {
-    console.log(`App running on http://localhost:${port}`);
+app.listen(process.env.PORT || 3000, function () {
+    console.log(`App running`);
 }); //Application listens at 8084 port.
