@@ -9,7 +9,7 @@ var urlencodedParser = bodyParser.urlencoded({
 });
 var connectionDb = require("../utility/connectionDB");
 var userDb = require("../utility/userDB");
-var userProfile = require("../utility/userProfileDB");
+var userProfile = require("../utility/UserProfileDB");
 var userModel = require("../models/userModel");
 
 router1.post("/", urlencodedParser, async function (req, res) {

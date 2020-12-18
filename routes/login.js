@@ -8,7 +8,7 @@ const {
 var connectionDb = require("../utility/connectionDB");
 var userConnectionDb = require("../utility/UserProfileDB");
 var userDb = require("../utility/userDB");
-var userProfile = require("../utility/userProfileDB");
+var userProfile = require("../utility/UserProfileDB");
 var userModel = require("../models/userModel");
 
 var urlencodedParser = bodyParser.urlencoded({
