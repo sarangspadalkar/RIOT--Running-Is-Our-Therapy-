@@ -67,5 +67,6 @@ app.use("/contact", contact); //This route is used for contact page.
 
 
 
-app.listen(port); //Application listens at 8084 port.
-console.log(`App running on http://localhost:${port}`);
+app.listen(process.env.PORT || port, function () {
+    console.log(`App running on http://localhost:${port}`);
+}); //Application listens at 8084 port.
