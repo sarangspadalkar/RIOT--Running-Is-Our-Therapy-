@@ -1,4 +1,4 @@
-var UserConnection = require("../models/userConnection");
+var UserConnection = require("../models/UserConnection");
 var UserProfile = require("../models/userProfileModel");
 var Connection = require("../models/connection");
 var connectionDb = require("./connectionDB");
