@@ -2,7 +2,7 @@ body {
   margin: 0;
   /* height: 100vh; */
   color: black;
-  background-image: url("/assets/Images/single_runner.jpg");
+  background-image: url("/assets/images/single_runner.jpg");
   background-position: inherit;
   background-repeat: no-repeat;
   background-size: cover;
