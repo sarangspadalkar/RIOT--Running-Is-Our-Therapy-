@@ -28,7 +28,7 @@ var connectionSchema = new mongoose.Schema({
     connectionTime: String,
     connectionImageURL: {
         type: String,
-        default: "/assets/images/man3.png",
+        default: "/assets/Images/man3.png",
         required: [true, "required"]
     },
 });
