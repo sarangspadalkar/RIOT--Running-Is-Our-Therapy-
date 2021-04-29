@@ -3,6 +3,9 @@ var app = express();
 var bodyParser = require("body-parser");
 var router = express.Router();
 var mongoose = require("mongoose");
+
+var dbUser = process.env.DBUSER
+var dbPassword = process.env.DBPASSWORD
 app.set("view engine", "ejs");
 app.set('views', __dirname + '/views');
 
@@ -21,7 +24,7 @@ app.use(session({
 //Database Connection.
 var initializeDb = async function () {
     try {
-        mongoose.connect("mongodb+srv://admin-user:P@ssword123@cluster0.fy5hu.mongodb.net/runner-db?retryWrites=true&w=majority", {
+        mongoose.connect(`mongodb+srv://${dbUser}:${dbPassword}@cluster0.fy5hu.mongodb.net/runner-db?retryWrites=true&w=majority`, {
             useNewUrlParser: true,
             useUnifiedTopology: true
         });
