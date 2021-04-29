@@ -2,7 +2,9 @@
     <div class="container-fluid ">
         <div class="row align-items-center ">
             <div class="col-sm-2">
-                <a href="/"><img src="/assets/Images/RIOT.png" width="150" height="70"></a>
+                <a href="/" class="navbar-brand" style="color: white;">
+                    <h2><i>R.I.O.T</i></h2>
+                </a>
             </div>
             <div class="col-sm-5">
                 <h2 class="text-left" style="color: white;"><i>Running Is Our Therapy</i> </h2>
@@ -13,18 +15,19 @@
                             Connection <i class="fa fa-calendar" aria-hidden="true"></i>
                         </a></li>
                     <% if (currentUser) { %>
-                    <li class="list-inline-item"><a href="/login/signout" style="color: white;">Sign Out <i
-                                class="fa fa-sign-out" aria-hidden="true"></i>
-                        </a></li>
-                    <li class="list-inline-item"><a href="/login/savedConnections" style="color: white;">My Connections
-                            <i class="fa fa-user" aria-hidden="true"></i>
-                        </a></li>
-                    <% } else { %>
-                    <li class="list-inline-item"><a href="/login" style="color: white;">Login <i class="fa fa-sign-in"
-                                aria-hidden="true"></i></a></li>
-                    <li class="list-inline-item"><a href="/signup" style="color: white;">Sign Up <i
-                                class="fa fa-user-plus"></i></a></li>
-                    <% } %>
+                        <li class="list-inline-item"><a href="/login/signout" style="color: white;">Sign Out <i
+                                    class="fa fa-sign-out" aria-hidden="true"></i>
+                            </a></li>
+                        <li class="list-inline-item"><a href="/login/savedConnections" style="color: white;">My
+                                Connections
+                                <i class="fa fa-user" aria-hidden="true"></i>
+                            </a></li>
+                        <% } else { %>
+                            <li class="list-inline-item"><a href="/login" style="color: white;">Login <i
+                                        class="fa fa-sign-in" aria-hidden="true"></i></a></li>
+                            <li class="list-inline-item"><a href="/signup" style="color: white;">Sign Up <i
+                                        class="fa fa-user-plus"></i></a></li>
+                            <% } %>
                 </ul>
             </div>
         </div>
@@ -40,10 +43,10 @@
             </ul>
         </div>
         <% if (currentUser) { %>
-        <div class="col-sm-4 ">
-            <h4>Welcome <%=currentUser.firstName %>!</h4>
-        </div>
-        <% }  %>
+            <div class="col-sm-4 ">
+                <h4>Welcome <%=currentUser.firstName %>!</h4>
+            </div>
+            <% } %>
     </div>
 </header>
 
