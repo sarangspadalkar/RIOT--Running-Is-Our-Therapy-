@@ -3,10 +3,9 @@ var User = require("../models/userModel");
 
 var getUser = async function getUser(user_Id) {
   try {
-    var result = await User.findOne({
+    return  await User.findOne({
       userId: user_Id
     });
-    return result;
   } catch (error) {
     console.log("Error while getting user : " + error);
     return [];
@@ -15,11 +14,9 @@ var getUser = async function getUser(user_Id) {
 
 var getUserPassword = async function getUserPassword(username) {
   try {
-    var result = await User.findOne({
+    return await User.findOne({
       username: username
     });
-
-    return result;
   } catch (error) {
     console.log("Error while getting user based on username: " + error);
     return [];
@@ -61,11 +58,8 @@ var add_user = async function add_user(firstname,
       country: country
     });
     let result = await newUser.save();
-    if (result) {
-      return true;
-    } else {
-      return false;
-    }
+    return result? true:false
+   
   } catch (error) {
     console.log("Error while adding user: " + error);
     return false;
@@ -77,11 +71,8 @@ var check_user = async function check_user(username) {
     var result = await User.findOne({
       username: username
     });
-    if (result) {
-      return true;
-    } else {
-      return false;
-    }
+    return result ? true : false
+    
   } catch (error) {
     console.log("Error while getting user based on username: " + error);
     return false;

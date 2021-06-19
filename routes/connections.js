@@ -1,8 +1,8 @@
 var express = require('express');
-var router1 = express.Router();
+var router = express.Router();
 var connectionDb = require("../utility/connectionDB");
 
-router1.get("/", async function (req, res) {
+router.get("/", async function (req, res) {
     // Fetch all the connections from the Database.
     var connectionData = await connectionDb.getConnections();
     if (Object.keys(connectionData).length > 0) {
@@ -18,4 +18,4 @@ router1.get("/", async function (req, res) {
 });
 
 
-module.exports = router1;
+module.exports = router;

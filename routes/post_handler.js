@@ -1,7 +1,7 @@
 //This file is being used to handle all the post request (RSVP, Update, Delete Buttons)
 
 var express = require('express');
-var router1 = express.Router();
+var router = express.Router();
 var bodyParser = require("body-parser");
 
 var urlencodedParser = bodyParser.urlencoded({
@@ -12,7 +12,7 @@ var userDb = require("../utility/userDB");
 var userProfile = require("../utility/UserProfileDB");
 var userModel = require("../models/userModel");
 
-router1.post("/", urlencodedParser, async function (req, res) {
+router.post("/", urlencodedParser, async function (req, res) {
 
     // Check if the action is an update request.
     if (req.body.update) {
@@ -67,7 +67,7 @@ router1.post("/", urlencodedParser, async function (req, res) {
                 req.session.theUser.userId
             );
             var savedConnections = await userProfile.getUserConnectionList(req.session.theUser.userId);
-            // console.log("Inside rsvp" + savedConnections);
+            
 
             if (savedConnections) {
                 res.render("savedConnections.ejs", {
@@ -97,4 +97,4 @@ router1.post("/", urlencodedParser, async function (req, res) {
 
 
 
-module.exports = router1;
+module.exports = router;

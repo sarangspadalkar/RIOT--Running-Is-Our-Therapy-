@@ -1,10 +1,10 @@
 var express = require('express');
-var router1 = express.Router();
+var router = express.Router();
 
-router1.get('/', function (req, res) {
+router.get('/', function (req, res) {
     res.render('contact', {
         currentUser: req.session.theUser
     });
 });
 
-module.exports = router1;
+module.exports = router;

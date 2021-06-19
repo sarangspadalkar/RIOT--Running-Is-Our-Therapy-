@@ -7,10 +7,10 @@ var connectionDb = require("./connectionDB");
 // Function to fetch all the user connections.
 var getUserConnectionList = async function (userId) {
     try {
-        let result = await UserConnection.find({
+        return await UserConnection.find({
             userId: userId
         });
-        return result;
+        
     } catch (error) {
         console.log("Error while getting all user connections : " + error);
         return [];

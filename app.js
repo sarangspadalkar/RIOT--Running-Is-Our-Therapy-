@@ -1,6 +1,5 @@
 var express = require("express");
 var app = express();
-var bodyParser = require("body-parser");
 var router = express.Router();
 var mongoose = require("mongoose");
 
@@ -71,4 +70,4 @@ app.use("/contact", contact); //This route is used for contact page.
 
 app.listen(process.env.PORT || 3000, function () {
     console.log(`App running`);
-}); //Application listens at 8084 port.
+}); 

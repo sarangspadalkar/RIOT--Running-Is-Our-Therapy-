@@ -2,7 +2,7 @@
 This file is used for managing the routes to the connection page. 
 */
 var express = require('express');
-var router1 = express.Router();
+var router = express.Router();
 var moment = require("moment");
 var bodyParser = require("body-parser");
 var validator = require('validator');
@@ -22,7 +22,7 @@ var urlencodedParser = bodyParser.urlencoded({
 });
 
 
-router1.get("/", async function (req, res) {
+router.get("/", async function (req, res) {
 
     // Check if the connectionId is passed in the req query and if the passed connectionId is valid.
     if (validator.isNumeric(req.query.connectionId)) {
@@ -56,7 +56,7 @@ router1.get("/", async function (req, res) {
     }
 });
 
-router1.get("/newConnection", async function (req, res) {
+router.get("/newConnection", async function (req, res) {
 
     if (req.session.theUser) {
         res.render("newConnection.ejs", {
@@ -72,7 +72,7 @@ router1.get("/newConnection", async function (req, res) {
     }
 });
 
-router1.post("/newConnection", urlencodedParser, [
+router.post("/newConnection", urlencodedParser, [
 
     check('Topic').custom((value) => {
         if (!value.split(' ').every(function (word) {
@@ -118,7 +118,6 @@ router1.post("/newConnection", urlencodedParser, [
     check('When').custom((value) => {
         var dtStart = new Date;
         var dtEnd = new Date(value);
-        // console.log(dtStart, dtEnd);
         if (dtEnd - dtStart < 0) {
 
             throw new Error('Event Time cannot be in the Past.')
@@ -176,4 +175,4 @@ router1.post("/newConnection", urlencodedParser, [
     }
 });
 
-module.exports = router1;
+module.exports = router;
