@@ -4,7 +4,7 @@ var User = require('../models/userModel');
 var getUser = async function getUser(user_Id) {
     try {
         return await User.findOne({
-            userId: user_Id,
+            userId: user_Id
         });
     } catch (error) {
         console.log('Error while getting user : ' + error);
@@ -15,7 +15,7 @@ var getUser = async function getUser(user_Id) {
 var getUserPassword = async function getUserPassword(username) {
     try {
         return await User.findOne({
-            username: username,
+            username: username
         });
     } catch (error) {
         console.log('Error while getting user based on username: ' + error);
@@ -40,11 +40,11 @@ var add_user = async function add_user(
             {},
             {
                 userId: 1,
-                _id: 0,
+                _id: 0
             }
         )
             .sort({
-                userId: -1,
+                userId: -1
             })
             .limit(1);
         console.log(userId);
@@ -59,7 +59,7 @@ var add_user = async function add_user(
             city: city,
             state: state,
             zipCode: zipcode,
-            country: country,
+            country: country
         });
         let result = await newUser.save();
         return result ? true : false;
@@ -72,7 +72,7 @@ var add_user = async function add_user(
 var check_user = async function check_user(username) {
     try {
         var result = await User.findOne({
-            username: username,
+            username: username
         });
         return result ? true : false;
     } catch (error) {
@@ -85,5 +85,5 @@ module.exports = {
     getUserPassword: getUserPassword,
     getUser: getUser,
     check_user: check_user,
-    add_user: add_user,
+    add_user: add_user
 };
