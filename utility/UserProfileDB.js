@@ -1,18 +1,16 @@
-var UserConnection = require("../models/UserConnection");
-var UserProfile = require("../models/userProfileModel");
-var Connection = require("../models/connection");
-var connectionDb = require("./connectionDB");
-
+var UserConnection = require('../models/UserConnection');
+var UserProfile = require('../models/userProfileModel');
+var Connection = require('../models/connection');
+var connectionDb = require('./connectionDB');
 
 // Function to fetch all the user connections.
 var getUserConnectionList = async function (userId) {
     try {
         return await UserConnection.find({
-            userId: userId
+            userId: userId,
         });
-        
     } catch (error) {
-        console.log("Error while getting all user connections : " + error);
+        console.log('Error while getting all user connections : ' + error);
         return [];
     }
 };
@@ -24,18 +22,18 @@ var addUserConnection = async function (rsvp, connectionId, userId) {
         var newConnection = new UserConnection({
             userId: userId,
             connectionObject: connectionDetails,
-            rsvp: rsvp
+            rsvp: rsvp,
         });
         let result = await newConnection.save();
         if (result == newConnection) {
-            console.log("User Connection Added");
+            console.log('User Connection Added');
             return true;
         } else {
-            console.log("User Connection Adding failed");
+            console.log('User Connection Adding failed');
             return false;
         }
     } catch (error) {
-        console.log("Error while saving user connection : " + error);
+        console.log('Error while saving user connection : ' + error);
         return false;
     }
 };
@@ -43,11 +41,10 @@ var addUserConnection = async function (rsvp, connectionId, userId) {
 // Function to update the rsvp for a  user connection.
 var updateConnection = async function (item, rsvpStatus) {
     const result = await UserConnection.updateOne(item, {
-        rsvp: rsvpStatus
+        rsvp: rsvpStatus,
     });
     return result.n > 0 && result.ok == 1;
 };
-
 
 //User Profile related Operations:
 var saveUserProfile = async function (user, userConnectionList) {
@@ -55,23 +52,22 @@ var saveUserProfile = async function (user, userConnectionList) {
     try {
         var newUserProfile = new UserProfile({
             userObject: user,
-            userConnections: userConnectionList
+            userConnections: userConnectionList,
         });
         result = await newUserProfile.save();
         if (result == newUserProfile) {
-            console.log("User profile Added");
+            console.log('User profile Added');
             result = true;
         } else {
-            console.log("User profile Adding failed");
+            console.log('User profile Adding failed');
             result = false;
         }
     } catch (error) {
-        console.log("Error while saving User profile : " + error);
+        console.log('Error while saving User profile : ' + error);
         result = false;
     }
     return result;
 };
-
 
 // Function to remove the connection from the userconnection list.
 var removeUserConnection = async function (connectionId, userId) {
@@ -81,13 +77,13 @@ var removeUserConnection = async function (connectionId, userId) {
         var connectionDetails = await connectionDb.getConnection(connectionId);
         const res = await UserConnection.deleteOne({
             userId: userId,
-            connectionObject: connectionDetails
+            connectionObject: connectionDetails,
         });
-        console.log("Connection deleted.");
+        console.log('Connection deleted.');
 
         return res.ok > 0 && res.deletedCount > 0;
     } catch (error) {
-        console.log("Error while removing user connection : " + error);
+        console.log('Error while removing user connection : ' + error);
         return false;
     }
 };
@@ -98,7 +94,7 @@ var saveUserConnection = async function (rsvp, connectionId, userId) {
     var newConnection = await connectionDb.getConnection(connectionId);
     let element = await UserConnection.findOne({
         userId: userId,
-        connectionObject: newConnection
+        connectionObject: newConnection,
     });
     if (element) {
         //update connection
@@ -132,25 +128,24 @@ var addConnection = async function (
             connectionDetails: cDetails,
             connectionLocation: cLocation,
             connectionDate: cDate,
-            connectionTime: cTime
+            connectionTime: cTime,
         });
         let result = await newConnection.save();
         if (result == newConnection) {
-            console.log("Connection Added");
+            console.log('Connection Added');
             return randomId;
         } else {
-            console.log("Connection Adding failed");
+            console.log('Connection Adding failed');
         }
     } catch (error) {
-        console.log("Error while saving connection : " + error);
+        console.log('Error while saving connection : ' + error);
     }
 };
-
 
 module.exports = {
     addConnection: addConnection,
     saveUserProfile: saveUserProfile,
     getUserConnectionList: getUserConnectionList,
     removeUserConnection: removeUserConnection,
-    saveUserConnection: saveUserConnection
+    saveUserConnection: saveUserConnection,
 };

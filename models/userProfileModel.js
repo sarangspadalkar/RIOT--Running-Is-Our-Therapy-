@@ -1,14 +1,14 @@
-var mongoose = require("mongoose");
+var mongoose = require('mongoose');
 
 var userProfileSchema = new mongoose.Schema({
     userObject: {
         type: Object,
-        required: [true, "required"]
+        required: [true, 'required'],
     },
     userConnections: {
         type: Array,
-        required: [true, "required"]
-    }
+        required: [true, 'required'],
+    },
 });
 
-module.exports = mongoose.model("UserProfile", userProfileSchema);
+module.exports = mongoose.model('UserProfile', userProfileSchema);
