@@ -9,18 +9,18 @@ var userProfile = require('../utility/UserProfileDB');
 var userModel = require('../models/userModel');
 
 var urlencodedParser = bodyParser.urlencoded({
-    extended: false,
+    extended: false
 });
 
 // To handle the GET request for Login.
 router.get('/', function (req, res) {
     if (req.session.theUser == null) {
         res.render('login', {
-            errors: null,
+            errors: null
         });
     } else {
         res.render('index', {
-            currentUser: req.session.theUser,
+            currentUser: req.session.theUser
         });
     }
 });
@@ -35,7 +35,7 @@ router.post(
             .isAlphanumeric()
             .withMessage('Username field must consists of alphabetical chars')
             .isLength({
-                min: 4,
+                min: 4
             })
             .withMessage('Username field must be 4 or more characters')
             .not()
@@ -46,12 +46,12 @@ router.post(
             .isAlphanumeric()
             .withMessage('Password field must consists of alphabetical chars')
             .isLength({
-                min: 6,
+                min: 6
             })
             .withMessage('Password field must be 6 or more characters')
             .not()
             .isEmpty()
-            .withMessage('Username  Value Cannot be left blank'),
+            .withMessage('Username  Value Cannot be left blank')
     ],
     async function (req, res) {
         if (req.session.theUser == null) {
@@ -62,7 +62,7 @@ router.post(
 
                 return res.render('login', {
                     currentUser: req.session.theUser,
-                    errors: login_errors.array(),
+                    errors: login_errors.array()
                 });
             } else {
                 //check if the username exists in the DB.
@@ -91,8 +91,8 @@ router.post(
                                 req.session.currentProfile.push({
                                     ...value.connectionObject,
                                     ...{
-                                        rsvp: value.rsvp,
-                                    },
+                                        rsvp: value.rsvp
+                                    }
                                 });
                             });
 
@@ -106,7 +106,7 @@ router.post(
                             }
                             res.render('savedConnections.ejs', {
                                 savedConnections: savedConnections,
-                                currentUser: req.session.theUser,
+                                currentUser: req.session.theUser
                             });
                         } else {
                             errors = [
@@ -114,14 +114,14 @@ router.post(
                                     value: '',
                                     msg: 'Invalid Password',
                                     param: 'password',
-                                    location: 'body',
-                                },
+                                    location: 'body'
+                                }
                             ];
                             console.log(errors);
 
                             return res.render('login', {
                                 currentUser: req.session.theUser,
-                                errors: errors,
+                                errors: errors
                             });
                         }
                     }
@@ -131,14 +131,14 @@ router.post(
                             value: req.body.username,
                             msg: 'Invalid Username',
                             param: 'username',
-                            location: 'body',
-                        },
+                            location: 'body'
+                        }
                     ];
                     console.log(errors);
 
                     return res.render('login', {
                         currentUser: req.session.theUser,
-                        errors: errors,
+                        errors: errors
                     });
                 }
             }
@@ -155,11 +155,11 @@ router.get('/savedConnections', async function (req, res) {
 
         res.render('savedConnections.ejs', {
             savedConnections: savedConnections,
-            currentUser: req.session.theUser,
+            currentUser: req.session.theUser
         });
     } else {
         res.render('login_fault.ejs', {
-            currentUser: '',
+            currentUser: ''
         });
         // res.render('login');
     }
@@ -170,7 +170,7 @@ router.get('/signout', async function (req, res) {
     req.session.destroy();
 
     res.render('index', {
-        currentUser: '',
+        currentUser: ''
     });
 });
 

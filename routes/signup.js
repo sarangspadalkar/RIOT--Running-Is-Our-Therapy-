@@ -9,7 +9,7 @@ var userProfile = require('../utility/UserProfileDB');
 var userModel = require('../models/userModel');
 
 var urlencodedParser = bodyParser.urlencoded({
-    extended: false,
+    extended: false
 });
 
 // To handle the GET request for Login.
@@ -17,11 +17,11 @@ router.get('/', function (req, res) {
     if (req.session.theUser == null) {
         res.render('signup', {
             errors: null,
-            success: false,
+            success: false
         });
     } else {
         res.render('index', {
-            currentUser: req.session.theUser,
+            currentUser: req.session.theUser
         });
     }
 });
@@ -35,7 +35,7 @@ router.post(
             .isAlphanumeric()
             .withMessage('Username field must consists of alphabetical chars')
             .isLength({
-                min: 4,
+                min: 4
             })
             .withMessage('Username field must be 4 or more characters')
             .not()
@@ -46,12 +46,12 @@ router.post(
             .isAlphanumeric()
             .withMessage('Password field must consists of alphabetical chars')
             .isLength({
-                min: 6,
+                min: 6
             })
             .withMessage('Password field must be 6 or more characters')
             .not()
             .isEmpty()
-            .withMessage('Username  Value Cannot be left blank'),
+            .withMessage('Username  Value Cannot be left blank')
     ],
     async function (req, res) {
         //check for login validation errors.
@@ -61,7 +61,7 @@ router.post(
 
             return res.render('signup', {
                 currentUser: req.session.theUser,
-                errors: signup.array(),
+                errors: signup.array()
             });
         } else {
             //check if the username exists in the DB.
@@ -82,7 +82,7 @@ router.post(
                 );
                 res.render('signup', {
                     errors: null,
-                    success: true,
+                    success: true
                 });
             } else {
                 errors = [
@@ -90,14 +90,14 @@ router.post(
                         value: req.body.username,
                         msg: 'Username is taken',
                         param: 'username',
-                        location: 'body',
-                    },
+                        location: 'body'
+                    }
                 ];
                 console.log(errors);
 
                 return res.render('signup', {
                     currentUser: req.session.theUser,
-                    errors: errors,
+                    errors: errors
                 });
             }
         }

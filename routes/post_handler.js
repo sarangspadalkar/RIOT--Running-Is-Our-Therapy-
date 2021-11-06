@@ -5,7 +5,7 @@ var router = express.Router();
 var bodyParser = require('body-parser');
 
 var urlencodedParser = bodyParser.urlencoded({
-    extended: false,
+    extended: false
 });
 var connectionDb = require('../utility/connectionDB');
 var userDb = require('../utility/userDB');
@@ -22,18 +22,18 @@ router.post('/', urlencodedParser, async function (req, res) {
             if (connectionData) {
                 res.render('connection.ejs', {
                     connectionDetails: connectionData,
-                    currentUser: req.session.theUser,
+                    currentUser: req.session.theUser
                 });
 
                 // if the connectionId is not found in the Database, return fault page.
             } else {
                 res.render('fault.ejs', {
-                    currentUser: req.session.theUser,
+                    currentUser: req.session.theUser
                 });
             }
         } else {
             res.render('login_fault.ejs', {
-                currentUser: '',
+                currentUser: ''
             });
             // res.render('login');
         }
@@ -54,12 +54,12 @@ router.post('/', urlencodedParser, async function (req, res) {
                 );
                 res.render('savedConnections.ejs', {
                     savedConnections: savedConnections,
-                    currentUser: req.session.theUser,
+                    currentUser: req.session.theUser
                 });
             }
         } else {
             res.render('login_fault.ejs', {
-                currentUser: '',
+                currentUser: ''
             });
             // res.render('login');
         }
@@ -81,14 +81,14 @@ router.post('/', urlencodedParser, async function (req, res) {
             if (savedConnections) {
                 res.render('savedConnections.ejs', {
                     savedConnections: savedConnections,
-                    currentUser: req.session.theUser,
+                    currentUser: req.session.theUser
                 });
             } else {
                 res.render('Error fetching savedConnections');
             }
         } else {
             res.render('login_fault.ejs', {
-                currentUser: '',
+                currentUser: ''
             });
             // res.render('login');
         }
@@ -97,7 +97,7 @@ router.post('/', urlencodedParser, async function (req, res) {
     } else {
         res.render('savedConnections.ejs', {
             savedConnections: savedConnections,
-            currentUser: req.session.theUser,
+            currentUser: req.session.theUser
         });
     }
 });

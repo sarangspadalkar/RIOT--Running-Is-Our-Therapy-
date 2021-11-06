@@ -13,7 +13,7 @@ var userDb = require('../utility/userDB');
 var userProfileDb = require('../utility/UserProfileDB');
 
 var urlencodedParser = bodyParser.urlencoded({
-    extended: false,
+    extended: false
 });
 
 router.get('/', async function (req, res) {
@@ -26,13 +26,13 @@ router.get('/', async function (req, res) {
         if (connectionData) {
             res.render('connection.ejs', {
                 connectionDetails: connectionData,
-                currentUser: req.session.theUser,
+                currentUser: req.session.theUser
             });
 
             // if the connectionId is not found in the Database , return fault page.
         } else {
             res.render('fault.ejs', {
-                currentUser: req.session.theUser,
+                currentUser: req.session.theUser
             });
         }
 
@@ -42,7 +42,7 @@ router.get('/', async function (req, res) {
         if (Object.keys(connectionData).length > 0) {
             res.render('connections.ejs', {
                 connectionData: connectionData,
-                currentUser: req.session.theUser,
+                currentUser: req.session.theUser
             });
         }
     }
@@ -52,11 +52,11 @@ router.get('/newConnection', async function (req, res) {
     if (req.session.theUser) {
         res.render('newConnection.ejs', {
             currentUser: req.session.theUser,
-            errors: null,
+            errors: null
         });
     } else {
         res.render('login_fault.ejs', {
-            currentUser: '',
+            currentUser: ''
         });
     }
 });
@@ -146,7 +146,7 @@ router.post(
             })
             .not()
             .isEmpty()
-            .withMessage('Event time Value Cannot be left blank'),
+            .withMessage('Event time Value Cannot be left blank')
     ],
     async function (req, res) {
         if (req.session.theUser) {
@@ -154,7 +154,7 @@ router.post(
             if (!errors.isEmpty()) {
                 return res.render('newConnection.ejs', {
                     currentUser: req.session.theUser,
-                    errors: errors.array(),
+                    errors: errors.array()
                 });
             } else {
                 var host = String(
@@ -187,7 +187,7 @@ router.post(
                 if (savedConnections) {
                     res.render('savedConnections.ejs', {
                         savedConnections: savedConnections,
-                        currentUser: req.session.theUser,
+                        currentUser: req.session.theUser
                     });
                 } else {
                     res.render('Error fetching savedConnections');
@@ -196,7 +196,7 @@ router.post(
             ///End
         } else {
             res.render('login_fault.ejs', {
-                currentUser: '',
+                currentUser: ''
             });
         }
     }

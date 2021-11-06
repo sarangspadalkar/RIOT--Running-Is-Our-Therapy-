@@ -19,7 +19,7 @@ app.use(
         secret: 'MySecretId',
         proxy: true,
         resave: true,
-        saveUninitialized: true,
+        saveUninitialized: true
     })
 );
 //Database Connection.
@@ -29,7 +29,7 @@ var initializeDb = async function () {
             `mongodb+srv://${dbUser}:${dbPassword}@cluster0.fy5hu.mongodb.net/runner-db?retryWrites=true&w=majority`,
             {
                 useNewUrlParser: true,
-                useUnifiedTopology: true,
+                useUnifiedTopology: true
             }
         );
 

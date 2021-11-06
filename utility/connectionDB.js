@@ -17,7 +17,7 @@ var getConnections = async function getConnections() {
 var getConnection = async function getConnection(connectionID) {
     try {
         let result = await connectionModel.findOne({
-            connectionId: connectionID,
+            connectionId: connectionID
         });
         if (result != null) {
             return result;
@@ -32,5 +32,5 @@ var getConnection = async function getConnection(connectionID) {
 
 module.exports = {
     getConnection: getConnection,
-    getConnections: getConnections,
+    getConnections: getConnections
 };
