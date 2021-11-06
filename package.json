@@ -15,10 +15,15 @@
   "version": "1.0.0",
   "description": "Marathon Runners",
   "main": "app.js",
-  "devDependencies": {},
+  "devDependencies": {
+    "husky": "^7.0.0",
+    "prettier": "^2.4.1"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js"
+    "start": "node app.js",
+    "prepare": "husky install",
+    "prettier-format": "prettier --config .prettierrc '**/*.js' --write"
   },
   "author": "Sarang Padalkar",
   "license": "ISC"
