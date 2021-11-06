@@ -2,37 +2,38 @@
 
 var express = require('express');
 var router = express.Router();
-var bodyParser = require("body-parser");
+var bodyParser = require('body-parser');
 
 var urlencodedParser = bodyParser.urlencoded({
-    extended: false
+    extended: false,
 });
-var connectionDb = require("../utility/connectionDB");
-var userDb = require("../utility/userDB");
-var userProfile = require("../utility/UserProfileDB");
-var userModel = require("../models/userModel");
+var connectionDb = require('../utility/connectionDB');
+var userDb = require('../utility/userDB');
+var userProfile = require('../utility/UserProfileDB');
+var userModel = require('../models/userModel');
 
-router.post("/", urlencodedParser, async function (req, res) {
-
+router.post('/', urlencodedParser, async function (req, res) {
     // Check if the action is an update request.
     if (req.body.update) {
         if (req.session.theUser) {
-            var connectionData = await connectionDb.getConnection(req.body.update);
+            var connectionData = await connectionDb.getConnection(
+                req.body.update
+            );
             if (connectionData) {
-                res.render("connection.ejs", {
+                res.render('connection.ejs', {
                     connectionDetails: connectionData,
-                    currentUser: req.session.theUser
+                    currentUser: req.session.theUser,
                 });
 
                 // if the connectionId is not found in the Database, return fault page.
             } else {
-                res.render("fault.ejs", {
-                    currentUser: req.session.theUser
+                res.render('fault.ejs', {
+                    currentUser: req.session.theUser,
                 });
             }
         } else {
-            res.render("login_fault.ejs", {
-                currentUser: ""
+            res.render('login_fault.ejs', {
+                currentUser: '',
             });
             // res.render('login');
         }
@@ -40,18 +41,25 @@ router.post("/", urlencodedParser, async function (req, res) {
         // Check if the action is delete request.
     } else if (req.body.delete) {
         if (req.session.theUser) {
-            var connectionData = await connectionDb.getConnection(req.body.delete);
+            var connectionData = await connectionDb.getConnection(
+                req.body.delete
+            );
             if (connectionData) {
-                await userProfile.removeUserConnection(req.body.delete, req.session.theUser.userId);
-                var savedConnections = await userProfile.getUserConnectionList(req.session.theUser.userId);
-                res.render("savedConnections.ejs", {
+                await userProfile.removeUserConnection(
+                    req.body.delete,
+                    req.session.theUser.userId
+                );
+                var savedConnections = await userProfile.getUserConnectionList(
+                    req.session.theUser.userId
+                );
+                res.render('savedConnections.ejs', {
                     savedConnections: savedConnections,
-                    currentUser: req.session.theUser
+                    currentUser: req.session.theUser,
                 });
             }
         } else {
-            res.render("login_fault.ejs", {
-                currentUser: ""
+            res.render('login_fault.ejs', {
+                currentUser: '',
             });
             // res.render('login');
         }
@@ -59,42 +67,39 @@ router.post("/", urlencodedParser, async function (req, res) {
         // Check if the action is RSVP request.
     } else if (req.body.rsvp) {
         if (req.session.theUser) {
-            rsvp_action = req.body.rsvp.split(" ")[0]
-            connectionId = req.body.rsvp.split(" ")[1]
+            rsvp_action = req.body.rsvp.split(' ')[0];
+            connectionId = req.body.rsvp.split(' ')[1];
             await userProfile.saveUserConnection(
                 rsvp_action,
                 connectionId,
                 req.session.theUser.userId
             );
-            var savedConnections = await userProfile.getUserConnectionList(req.session.theUser.userId);
-            
+            var savedConnections = await userProfile.getUserConnectionList(
+                req.session.theUser.userId
+            );
 
             if (savedConnections) {
-                res.render("savedConnections.ejs", {
+                res.render('savedConnections.ejs', {
                     savedConnections: savedConnections,
-                    currentUser: req.session.theUser
+                    currentUser: req.session.theUser,
                 });
             } else {
-                res.render("Error fetching savedConnections")
+                res.render('Error fetching savedConnections');
             }
         } else {
-
-            res.render("login_fault.ejs", {
-                currentUser: ""
+            res.render('login_fault.ejs', {
+                currentUser: '',
             });
             // res.render('login');
         }
 
         // If invalid request render the saved connection view.
     } else {
-        res.render("savedConnections.ejs", {
+        res.render('savedConnections.ejs', {
             savedConnections: savedConnections,
-            currentUser: req.session.theUser
+            currentUser: req.session.theUser,
         });
     }
-
 });
-
-
 
 module.exports = router;
